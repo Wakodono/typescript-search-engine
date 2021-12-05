@@ -1,21 +1,17 @@
 import React from 'react';
 import './App.css';
 import SearchPage from './components/SearchPage'
-import Details from './components/Details'
+import DetailPage from './components/DetailPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
 function App() {
   return (
       <BrowserRouter>
-        <div className="App">
-          <header className="App-header
             <Routes>
               <Route path='/' element={<SearchPage />} />
-              <Route path='/details' element={<Details/>} />
+              <Route path='/details' element={<DetailPage/>} />
             </Routes>
-          </header>
-        </div>
       </BrowserRouter>
   );
 }

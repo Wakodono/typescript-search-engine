@@ -1,9 +1,14 @@
-import React from 'react'
+import React, { ChangeEvent } from 'react'
 import { useState, useEffect } from 'react'
-import Song from '../interfaces/song'
+import { Track } from '../typings'
 
 const SearchPage = () => {
-    const [songs, setSongs] = useState<Song[]>([])
+    const [query, setQuery] = useState('')
+    const [results, setResults] = useState<Track[]>([])
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setQuery(e.target.value)
+    }
 
     const getSongs = async () => {
         try {

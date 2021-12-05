@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Details() {
+function DetailPage() {
     return (
         <div>
             
@@ -8,4 +8,4 @@ function Details() {
     )
 }
 
-export default Details
+export default DetailPage
