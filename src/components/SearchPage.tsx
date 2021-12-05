@@ -1,27 +1,59 @@
-import React, { ChangeEvent } from 'react'
-import { useState, useEffect } from 'react'
-import { Track } from '../typings'
+import React, { ChangeEvent, FormEvent } from "react";
+import { useState, useEffect } from "react";
+import { Card, Col, Container, Form, Row } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import { Track } from "../typings";
+
+const searchEndpoint =
+  "https://striveschool-api.herokuapp.com/api/deezer/search?q=";
 
 const SearchPage = () => {
-    const [query, setQuery] = useState('')
-    const [results, setResults] = useState<Track[]>([])
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<Track[]>([]);
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setQuery(e.target.value)
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setQuery(e.target.value);
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const response = await fetch(searchEndpoint + query);
+
+    if (response.ok) {
+      const { data } = await response.json();
+      setResults(data);
     }
+  };
 
-    const getSongs = async () => {
-        try {
-            let res = await fetch('')
-        } catch (error) {
-            console.log(error)
-        }
-    }
-    return (
-        <div>
-            <h1>Searching shall take place here...</h1>
-        </div>
-    )
-}
+  return (
+    <Container>
+      <Row>
+        <Col xs={10} md={8} className="mx-auto">
+          <Form onSubmit={handleSubmit}>
+            <Form.Control type="search" value={query} onChange={handleChange} />
+          </Form>
+        </Col>
+        <Col xs={10} md={8} className="mx-auto my-3">
+          <Row>
+            {results.map((track) => (
+              <Col xs={10} md={4} key={track.id}>
+                <Link to={`details/${track.id}`}>
+                  <Card>
+                    <Card.Img variant="top" src={track.album.cover_medium} />
+                    <Card.Body>
+                      <Card.Title>{track.title}</Card.Title>
+                      <Card.Text>{track.artist.name}</Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Link>
+              </Col>
+            ))}
+          </Row>
+        </Col>
+      </Row>
+    </Container>
+  );
+};
 
-export default SearchPage
+export default SearchPage;
