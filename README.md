@@ -4,8 +4,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Installation
 
-1. Clone the repository: git clone <repository-url>
-2. Install dependencies: npm install
+1. Clone the repository: git clone https://github.com/Wakodono/typescript-search-engine
+2. Navigate to the project: cd typescript-search-engine
+3. Install dependencies: npm install
 
 ## Running the App
 
